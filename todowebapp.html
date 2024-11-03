@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List with Task Table</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>To-Do List</h1>
+
+    <form id="task-form">
+      <input type="text" id="task-name" placeholder="Task Name" required />
+      <input type="date" id="task-deadline" required />
+      <textarea id="task-comment" placeholder="Comments"></textarea>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <table id="task-table" border="1">
+      <thead>
+        <tr>
+          <th>Task ID</th>
+          <th>Task Name</th>
+          <th>Input Date</th>
+          <th>Deadline Date</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Tasks are to be added and displayed here -->
+      </tbody>
+    </table>
+
+    <script src="script.js"></script>
+  </body>
+</html>
