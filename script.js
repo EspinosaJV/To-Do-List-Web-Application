@@ -10,7 +10,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let taskId = 1;
   let deleteHeaderAdded = false;
-  const tasks = []; // Store tasks in this array
+  const tasks = loadTasks(); // Loads tasks from local storage
+
+  // Function that saves tasks to local storage
+  function saveTasks() {
+    localStorage.setItem(`tasks`, JSON.stringify(tasks));
+  }
+
+  // Functioon that loads the tasks from the local storage
+  function loadTasks() {
+    const savedTasks = localStorage.getItem(`tasks`);
+    if (savedTasks) {
+      const parsedTasks = JSON.parse(savedTasks);
+      taskId = parsedTasks.lengtgh
+        ? parsedTasks[parsedTasks.length - 1].id + 1
+        : 1; // Sets taskId based on last task
+      return parsedTasks;
+    }
+    return [];
+  }
 
   // Function that adds the DELETE column header
   function addDeleteColumnHeader() {
@@ -76,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const checkbox = newRow.querySelector(`.task-checkbox`);
       checkbox.addEventListener(`change`, function () {
         task.completed = checkbox.checked;
+        saveTasks();
         displayTasks();
       });
 
@@ -85,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const index = tasks.findIndex((t) => t.id === task.id);
         if (index > -1) {
           tasks.splice(index, 1);
+          saveTasks();
         }
 
         if (tasks.length === 0) {
@@ -123,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     tasks.push(task);
+    saveTasks();
     displayTasks();
 
     // Handles the clearing of input fields after submitting
