@@ -7,11 +7,21 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("task-table")
     .getElementsByTagName("thead")[0];
   const taskFilter = document.getElementById("task-filter");
+  const myTaskButton = document.getElementById("my-task-btn");
 
   let taskId = 1;
   let deleteHeaderAdded = false;
   const tasks = loadTasks(); // Loads tasks from local storage
 
+  const currentPage = window.location.pathname;
+  if (currentPage.endsWith("todowebapp.html") || currentPage === "/") {
+    myTaskButton.classList.add("active");
+    myTaskButton.removeAttribute("onclick");
+  }
+
+  myTaskButton.addEventListener("click", () => {
+    window.location.href = "todowebapp.html";
+  });
   // Function that saves tasks to local storage
   function saveTasks() {
     localStorage.setItem(`tasks`, JSON.stringify(tasks));

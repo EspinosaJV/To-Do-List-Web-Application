@@ -95,6 +95,12 @@ body {
   text-align: center;
 }
 
+.my-task-button.active {
+  background-color: #e4ecec;
+  color: #000000;
+  cursor: default;
+}
+
 .my-task-button::before {
   content: ".";
   font-size: 40px;
