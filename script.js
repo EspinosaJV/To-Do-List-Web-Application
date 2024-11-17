@@ -43,11 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function that adds the DELETE column header
   function addDeleteColumnHeader() {
     if (!deleteHeaderAdded) {
-      const headerRow = taskTableHead.rows[0];
-      const deleteHeader = document.createElement("th");
-      deleteHeader.textContent = "Delete";
-      deleteHeader.classList.add("delete-header");
-      headerRow.appendChild(deleteHeader);
+      const headerContainer = document.querySelector(".header-container");
+      const deleteHeader = document.createElement("div");
+      deleteHeader.textContent = "DELETE";
+      deleteHeader.classList.add("header-item");
+      headerContainer.appendChild(deleteHeader);
       deleteHeaderAdded = true;
     }
   }
