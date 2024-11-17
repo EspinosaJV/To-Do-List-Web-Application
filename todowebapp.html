@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- outermost container -->
     <div class="container">
       <img src="images/ToDoListLogo.png" alt="Logo" class="logo" />
       <p class="title">
@@ -14,10 +15,37 @@
         <span class="line-two">LIST</span>
       </p>
       <button class="my-task-button" id="my-task-btn">my tasks</button>>
-      <div class="inner-container"></div>
-    </div>
 
-    <h1>To-Do List</h1>
+      <!-- innermost container -->
+      <div class="inner-container">
+        <!-- Task Dropdown Filter Option -->
+        <label for="task-filter">Filter Tasks: </label>
+        <select id="task-filter">
+          <option value="all">All Tasks</option>
+          <option value="completed">Completed Tasks</option>
+          <option value="pending">Pending Tasks</option>
+        </select>
+
+        <!-- Task Filter Portion -->
+        <table id="task-table">
+          <thead>
+            <tr>
+              <div class="header-container">
+                <div class="header-item">TASK ID</div>
+                <div class="header-item">TASK NAME</div>
+                <div class="header-item">INPUT DATE</div>
+                <div class="header-item">DEADLINE DATE</div>
+                <div class="header-item">COMMENTS</div>
+                <div class="header-item">COMPLETED</div>
+              </div>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Tasks are to be added and displayed here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <form id="task-form">
       <input type="text" id="task-name" placeholder="Task Name" required />
@@ -25,31 +53,6 @@
       <textarea id="task-comment" placeholder="Comments"></textarea>
       <button type="submit">Add Task</button>
     </form>
-
-    <!-- Task Dropdown Filter Option -->
-    <label for="task-filter">Filter Tasks: </label>
-    <select id="task-filter">
-      <option value="all">All Tasks</option>
-      <option value="completed">Completed Tasks</option>
-      <option value="pending">Pending Tasks</option>
-    </select>
-
-    <!-- Task Filter Portion -->
-    <table id="task-table" border="1">
-      <thead>
-        <tr>
-          <th>Task ID</th>
-          <th>Task Name</th>
-          <th>Input Date</th>
-          <th>Deadline Date</th>
-          <th>Comments</th>
-          <th>Completed</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Tasks are to be added and displayed here -->
-      </tbody>
-    </table>
 
     <script src="script.js"></script>
   </body>
