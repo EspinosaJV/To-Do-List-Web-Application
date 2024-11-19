@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   const taskForm = document.getElementById("task-form");
-  const taskTableBody = document
-    .getElementById("task-table")
-    .getElementsByTagName("tbody")[0];
-  const taskTableHead = document
-    .getElementById("task-table")
-    .getElementsByTagName("thead")[0];
   const taskFilter = document.getElementById("task-filter");
   const myTaskButton = document.getElementById("my-task-btn");
 
@@ -32,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTasks = localStorage.getItem(`tasks`);
     if (savedTasks) {
       const parsedTasks = JSON.parse(savedTasks);
-      taskId = parsedTasks.lengtgh
+      taskId = parsedTasks.length
         ? parsedTasks[parsedTasks.length - 1].id + 1
         : 1; // Sets taskId based on last task
       return parsedTasks;
@@ -66,71 +60,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function that displays task based on chosen filter
   function displayTasks() {
-    taskTableBody.innerHTML = "";
+    const taskContainer = document.querySelector(".task-container");
+    taskContainer.innerHTML = "";
 
-    // This filters the tasks based on chosen filter
     const filteredTasks = tasks.filter((task) => {
       if (taskFilter.value === "completed") {
         return task.completed;
       } else if (taskFilter.value === "pending") {
         return !task.completed;
       }
-      return true; // displays both completed & pending tasks
+      return true;
     });
 
-    // Displays the filtered tasks
     filteredTasks.forEach((task) => {
-      const newRow = taskTableBody.insertRow();
-
-      newRow.innerHTML = `
-        <td>${task.id}</td>
-        <td>${task.name}</td>
-        <td>${task.dateAdded}</td>
-        <td>${task.deadline}</td>
-        <td>${task.comment}</td>
-        <td><input type="checkbox" class="task-checkbox" ${
-          task.completed ? "checked" : ""
-        }></td>
-        <td><button class="delete-btn">Delete</button></td>
-      `;
-
-      // Application of the completed styling if task is marked complete
+      const taskRow = document.createElement("div");
+      taskRow.classList.add("task-row");
       if (task.completed) {
-        newRow.style.textDecoration = `line-through`;
-        newRow.style.color = `gray`;
+        taskRow.style.textDecoration = "line-through";
+        taskRow.style.color = "gray";
       }
 
-      // Task completion checkbox event listener
-      const checkbox = newRow.querySelector(`.task-checkbox`);
-      checkbox.addEventListener(`change`, function () {
+      taskRow.innerHTML = `
+        <div>${task.id}</div>
+        <div>${task.name}</div>
+        <div>${task.dateAdded}</div>
+        <div>${task.deadline}</div>
+        <div>${task.comment}</div>
+        <div>
+          <input type="checkbox" class="task-checkbox" ${
+            task.completed ? "checked" : ""
+          }>
+        </div>
+        <div>
+          <button class="delete-btn">Delete</button>
+        </div>
+      `;
+
+      const checkbox = taskRow.querySelector(".task-checkbox");
+      checkbox.addEventListener("change", function () {
         task.completed = checkbox.checked;
         saveTasks();
         displayTasks();
       });
 
-      // Delete button event listener
-      const deleteButton = newRow.querySelector(`.delete-btn`);
-      deleteButton.addEventListener(`click`, function () {
-        const index = tasks.findIndex((t) => t.id === task.id);
+      const deleteButton = taskRow.querySelector(".delete-btn");
+      deleteButton.addEventListener("click", function () {
+        const index = task.findIndex((t) => t.id === task.id);
         if (index > -1) {
           tasks.splice(index, 1);
           saveTasks();
         }
-
-        if (tasks.length === 0) {
-          removeDeleteColumnHeader();
-        }
-
         displayTasks();
       });
-    });
 
-    // Shows or hides the delete header based on the number of tasks currently
-    if (tasks.length > 0) {
-      addDeleteColumnHeader();
-    } else {
-      removeDeleteColumnHeader();
-    }
+      taskContainer.appendChild(taskRow);
+    });
   }
 
   // Event Listener when task is submitted
