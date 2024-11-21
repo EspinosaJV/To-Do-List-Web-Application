@@ -98,21 +98,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const checkbox = taskRow.querySelector(".task-checkbox");
       checkbox.addEventListener("change", function () {
-        task.completed = checkbox.checked;
+        task.completed = checkbox.ariaChecked;
         saveTasks();
         displayTasks();
       });
 
       const deleteButton = taskRow.querySelector(".delete-btn");
       deleteButton.addEventListener("click", function () {
-        const index = task.findIndex((t) => t.id === task.id);
+        const index = tasks.findIndex((t) => t.id === task.id);
         if (index > -1) {
           tasks.splice(index, 1);
           saveTasks();
         }
         displayTasks();
       });
-
       taskContainer.appendChild(taskRow);
     });
   }

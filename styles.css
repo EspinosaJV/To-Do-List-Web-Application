@@ -130,8 +130,10 @@ body {
   grid-template-columns: 10% 20% 15% 15% 20% 10% 10%;
   background-color: #b9c7c6;
   padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: 0;
+  border-bottom: none;
 }
 
 .header-item {
@@ -229,22 +231,34 @@ body {
 }
 
 .task-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  width: 100%;
+}
+
+.task-container > .task-row {
+  display: grid;
+  grid-template-columns: 10% 20% 15% 15% 20% 10% 10%;
+  width: 100%;
 }
 
 .task-row {
   display: grid;
   grid-template-columns: 10% 20% 15% 15% 20% 10% 10%;
-  padding: 8px;
-  background-color: #e4ecec;
-  align-items: center;
+  width: 100%;
 }
 
 .task-row > div {
   text-align: center;
   padding: 5px;
+  border-right: 8px solid #b9c7c6;
+  box-sizing: border-box;
+}
+
+.task-row > div:last-child {
+  border-right: none;
+}
+
+.task-row:first-child {
+  border-top: 5px solid #b9c7c6;
 }
 
 .task-row .delete-btn {
