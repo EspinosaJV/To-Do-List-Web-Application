@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     myTaskButton.removeAttribute("onclick");
   }
 
+  const newTaskButton = document.getElementById("new-task-btn");
+  newTaskButton.addEventListener("click", () => {
+    window.location.href = "newtask.html";
+  });
+
   myTaskButton.addEventListener("click", () => {
     window.location.href = "todowebapp.html";
   });
@@ -74,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     filteredTasks.forEach((task) => {
       const taskRow = document.createElement("div");
-      taskRow.classList.add("task-row");
+      taskRow.classList.add("task-row", "new-task-row");
       if (task.completed) {
         taskRow.style.textDecoration = "line-through";
         taskRow.style.color = "gray";

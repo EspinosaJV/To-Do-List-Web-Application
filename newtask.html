@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Task</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <img src="images/ToDoListLogo.png" alt="Logo" class="logo" />
+      <p class="title">
+        <span class="line-one">NEW TASK</span>
+      </p>
+      <button class="my-task-button" id="back-btn">Back to My Tasks</button>
+
+      <div class="inner-container">
+        <form id="new-task-form">
+          <h2>Create a New Task</h2>
+          <input type="text" id="task-name" placeholder="Task Name" required />
+          <input type="date" id="task-deadline" required />
+          <textarea id="task-comment" placeholder="Comments"></textarea>
+          <button type="submit">Submit Task</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="newtask.js"></script>
+  </body>
+</html>

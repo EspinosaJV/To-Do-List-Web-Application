@@ -65,7 +65,7 @@ body {
   background-color: #b9c7c6;
   border-radius: 10px;
   height: calc(100vh - 100px);
-  width: 100%;
+  width: calc(100% - 50px);
   box-sizing: border-box;
   position: relative;
   border-top-left-radius: 10px;
@@ -265,12 +265,18 @@ body {
 }
 
 .task-row .delete-btn {
-  padding: 5px 10px;
+  padding: 8px 12px;
   background-color: #ff4444;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.task-row .delete-btn:hover {
+  background-color: #ff2222;
 }
 
 .task-row .task-checkbox {
@@ -330,4 +336,33 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.new-task-row {
+  font-family: "BodyFont";
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-transform: capitalize;
+}
+
+#new-task-btn {
+  position: absoule;
+  bottom: 240px;
+  padding: 15px 30px;
+  background-color: #b9c7c6;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  width: 350px;
+  font-family: "BodyFont";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#new-task-btn:hover {
+  background-color: #e4ecec;
 }
