@@ -382,3 +382,22 @@ body {
   color: #333;
   text-transform: capitalize;
 }
+
+.add-new-task-header-container {
+  position: relative;
+  box-sizing: border-box;
+  justify-content: center;
+  top: 80px;
+  background-color: #b9c7c6;
+  border-radius: 10px;
+  padding: 5px 0px;
+  max-width: 208px;
+  max-height: 60px;
+  margin: 0 auto;
+}
+
+#add-new-task-header {
+  font-family: "HeaderFont";
+  font-size: 20px;
+  text-align: center;
+}
