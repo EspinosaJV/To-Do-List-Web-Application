@@ -1,22 +1,22 @@
-document.addEventListener("D0MContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("New task page DOM is now fully loaded and parsed");
   const taskForm = document.getElementById("new-task-form");
 
-  taskForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+  const newTaskButton = document.getElementById("new-task-btn");
+  const myTaskButton = document.getElementById("my-task-btn");
+  const activeNewTaskButtonId = localStorage.getItem("activeNewTaskButton");
 
-    const taskName = document.getElementById("task-name").value;
-    const taskDeadline = document.getElementById("task-deadline").value;
-    const taskComment = document.getElementById("task-comment").value;
-  
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.push({
-        name: taskName,
-        deadline: taskDeadline;
-        comment: taskComment,
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+  console.log("Retrieved from localStorage:", activeNewTaskButtonId);
 
-    alert("Task added successfully!");
-    taskForm.reset();
-    });
+  // Checker if New Task Button is set active
+  if (activeNewTaskButtonId) {
+    const activeNewTaskButton = document.getElementById(activeNewTaskButtonId);
+    if (activeNewTaskButton) {
+      console.log("I have set the active state in the new page.");
+      activeNewTaskButton.classList.add("active");
+      console.log("Button classes:", activeNewTaskButton.classList);
+    } else {
+      console.log("There is no active new task button");
+    }
+  }
 });

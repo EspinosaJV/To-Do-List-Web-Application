@@ -10,17 +10,19 @@
     <div class="container">
       <img src="images/ToDoListLogo.png" alt="Logo" class="logo" />
       <p class="title">
-        <span class="line-one">NEW TASK</span>
+        <span class="line-one">TO DO</span>
+        <span class="line-two">LIST</span>
       </p>
-      <button class="my-task-button" id="back-btn">Back to My Tasks</button>
+      <button class="my-task-button" id="my-task-btn">my tasks</button>
+      <button class="new-task-button" id="new-task-btn">new task</button>
 
       <div class="inner-container">
+        <h1>Add a New Task</h1>
         <form id="new-task-form">
-          <h2>Create a New Task</h2>
           <input type="text" id="task-name" placeholder="Task Name" required />
           <input type="date" id="task-deadline" required />
           <textarea id="task-comment" placeholder="Comments"></textarea>
-          <button type="submit">Submit Task</button>
+          <button type="submit">Add Task</button>
         </form>
       </div>
     </div>

@@ -90,6 +90,23 @@ body {
 }
 
 .my-task-button {
+  position: relative;
+  padding: 15px 30px;
+  top: 206px;
+  background-color: #b9c7c6;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  width: 350px;
+  font-family: "BodyFont";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.new-task-button {
   position: absolute;
   bottom: 300px;
   padding: 15px 30px;
@@ -112,6 +129,12 @@ body {
   cursor: default;
 }
 
+.new-task-button.active {
+  background-color: #e4ecec;
+  color: #000000;
+  cursor: default;
+}
+
 .my-task-button::before {
   content: ".";
   font-size: 40px;
@@ -122,7 +145,21 @@ body {
   transform: translateY(-8px);
 }
 
+.new-task-button::before {
+  content: ".";
+  font-size: 40px;
+  color: #000000;
+  margin-right: 10px;
+  display: inline-block;
+  line-height: 1;
+  transform: translateY(-8px);
+}
+
 .my-task-button:hover {
+  background-color: #e4ecec;
+}
+
+.new-task-button:hover {
   background-color: #e4ecec;
 }
 
@@ -344,25 +381,4 @@ body {
   font-weight: bold;
   color: #333;
   text-transform: capitalize;
-}
-
-#new-task-btn {
-  position: absoule;
-  bottom: 240px;
-  padding: 15px 30px;
-  background-color: #b9c7c6;
-  color: #000000;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  width: 350px;
-  font-family: "BodyFont";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-#new-task-btn:hover {
-  background-color: #e4ecec;
 }

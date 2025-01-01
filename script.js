@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let taskId = 1;
   let deleteHeaderAdded = false;
-  const tasks = loadTasks(); // Loads tasks from local storage
+  const tasks = loadTasks();
 
   const currentPage = window.location.pathname;
   if (currentPage.endsWith("todowebapp.html") || currentPage === "/") {
@@ -15,31 +15,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const newTaskButton = document.getElementById("new-task-btn");
   newTaskButton.addEventListener("click", () => {
+    localStorage.setItem("activeNewTaskButton", "new-task-btn");
+    console.log(
+      "Active Button Set:",
+      localStorage.getItem("activeNewTaskButton")
+    );
     window.location.href = "newtask.html";
   });
 
   myTaskButton.addEventListener("click", () => {
     window.location.href = "todowebapp.html";
   });
-  // Function that saves tasks to local storage
+
   function saveTasks() {
     localStorage.setItem(`tasks`, JSON.stringify(tasks));
   }
 
-  // Functioon that loads the tasks from the local storage
   function loadTasks() {
     const savedTasks = localStorage.getItem(`tasks`);
     if (savedTasks) {
       const parsedTasks = JSON.parse(savedTasks);
       taskId = parsedTasks.length
         ? parsedTasks[parsedTasks.length - 1].id + 1
-        : 1; // Sets taskId based on last task
+        : 1;
       return parsedTasks;
     }
     return [];
   }
 
-  // Function that adds the DELETE column header
   function addDeleteColumnHeader() {
     if (!deleteHeaderAdded) {
       const headerContainer = document.querySelector(".header-container");
