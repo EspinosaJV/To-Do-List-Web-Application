@@ -19,4 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("There is no active new task button");
     }
   }
+
+  myTaskButton.addEventListener("click", () => {
+    console.log("Now moving to My Tasks page.");
+    window.location.href = "todowebapp.html";
+  });
 });
