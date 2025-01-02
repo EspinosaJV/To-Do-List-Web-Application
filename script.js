@@ -124,33 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Event Listener when task is submitted
-  taskForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const taskName = document.getElementById("task-name").value;
-    const taskDeadline = document.getElementById("task-deadline").value;
-    const taskComment = document.getElementById("task-comment").value;
-    const taskInputDate = new Date().toLocaleDateString();
-
-    // Handles the creation of a new task object which is then added to the task array
-    const task = {
-      id: taskId++,
-      name: taskName,
-      dateAdded: taskInputDate,
-      deadline: taskDeadline,
-      comment: taskComment,
-      completed: false,
-    };
-
-    tasks.push(task);
-    saveTasks();
-    displayTasks();
-
-    // Handles the clearing of input fields after submitting
-    taskForm.reset();
-  });
-
   // Event Listener for task filter
   taskFilter.addEventListener("change", displayTasks);
 
