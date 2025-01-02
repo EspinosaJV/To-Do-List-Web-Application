@@ -426,6 +426,9 @@ body {
   border-radius: 10px;
   box-sizing: border-box;
   background-color: #e4ecec;
+  color: #000000;
+  font-family: "BodyFont";
+  font-size: 14px;
 }
 
 #task-name::placeholder {
