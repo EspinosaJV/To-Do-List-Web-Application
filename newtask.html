@@ -20,12 +20,30 @@
         <div class="add-new-task-header-container">
           <h1 id="add-new-task-header">ADD A NEW TASK</h1>
         </div>
-        <form id="new-task-form">
-          <input type="text" id="task-name" placeholder="Task Name" required />
-          <input type="date" id="task-deadline" required />
-          <textarea id="task-comment" placeholder="Comments"></textarea>
-          <button type="submit">Add Task</button>
-        </form>
+
+        <div class="add-new-task-form-container">
+          <form id="new-task-form">
+            <input
+              type="text"
+              id="task-name"
+              placeholder="TASK NAME"
+              required
+            />
+            <input type="date" id="task-deadline" required />
+            <textarea
+              id="task-comment"
+              placeholder="Enter task description..."
+            ></textarea>
+            <div class="add-new-task-button-container">
+              <button type="clear-task" class="add-new-task-btns">
+                CLEAR TASK
+              </button>
+              <button type="add-task" class="add-new-task-btns">
+                ADD TASK
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
