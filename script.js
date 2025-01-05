@@ -106,7 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const checkbox = taskRow.querySelector(".task-checkbox");
       checkbox.addEventListener("change", function () {
-        task.completed = checkbox.ariaChecked;
+        console.log("Task has changed checkbox state.");
+        task.completed = checkbox.checked;
         saveTasks();
         displayTasks();
       });

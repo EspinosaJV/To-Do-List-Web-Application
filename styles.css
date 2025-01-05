@@ -321,6 +321,19 @@ body {
   height: 20px;
 }
 
+.task-checkbox {
+  cursor: pointer;
+}
+
+.task-checkbox:checked {
+  background-color: #b9c7c6;
+  border: 3px solid #e4ecec;
+}
+
+.task-checkbox:not(:checked) {
+  background-color: #e4ecec;
+  border: 3px solid #b9c7c6;
+}
 .filter-container {
   font-family: "HeaderFont";
   font-size: 16px;
@@ -492,4 +505,10 @@ form button {
 .add-new-task-btns:hover {
   background-color: #b9c7c6;
   border: 1px solid #b9c7c6;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
