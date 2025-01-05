@@ -505,6 +505,7 @@ form button {
 .add-new-task-btns:hover {
   background-color: #b9c7c6;
   border: 1px solid #b9c7c6;
+  cursor: pointer;
 }
 
 input[type="checkbox"] {

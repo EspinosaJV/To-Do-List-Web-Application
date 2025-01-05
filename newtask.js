@@ -47,9 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function that displays task based on chosen filter
   function displayTasks() {
-    const taskContainer = document.querySelector(".task-container");
-    taskContainer.innerHTML = "";
-
     const filteredTasks = tasks.filter((task) => {
       if (taskFilter.value === "completed") {
         return task.completed;
@@ -127,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tasks.push(task);
       saveTasks();
-      displayTasks();
+      window.location.href = "todowebapp.html";
 
       // Handles the clearing of input fields after submitting
       taskForm.reset();
