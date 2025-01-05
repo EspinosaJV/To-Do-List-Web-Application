@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskForm = document.getElementById("task-form");
   const taskFilter = document.getElementById("task-filter");
   const myTaskButton = document.getElementById("my-task-btn");
+  const modal = document.getElementById("confirmModal");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
 
   let taskId = 1;
   let deleteHeaderAdded = false;
@@ -80,6 +83,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return true;
     });
 
+    // Add this console.log to debug
+    console.log("Filtered tasks:", filteredTasks);
+
     filteredTasks.forEach((task) => {
       const taskRow = document.createElement("div");
       taskRow.classList.add("task-row", "new-task-row");
@@ -89,20 +95,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       taskRow.innerHTML = `
-        <div>${task.id}</div>
-        <div>${task.name}</div>
-        <div>${task.dateAdded}</div>
-        <div>${task.deadline}</div>
-        <div>${task.comment}</div>
-        <div>
-          <input type="checkbox" class="task-checkbox" ${
-            task.completed ? "checked" : ""
-          }>
-        </div>
-        <div>
-          <button class="delete-btn">Delete</button>
-        </div>
-      `;
+            <div>${task.id}</div>
+            <div>${task.name}</div>
+            <div>${task.dateAdded}</div>
+            <div>${task.deadline}</div>
+            <div>${task.comment}</div>
+            <div>
+                <input type="checkbox" class="task-checkbox" ${
+                  task.completed ? "checked" : ""
+                }>
+            </div>
+            <div>
+                <button class="delete-btn" data-task-id="${
+                  task.id
+                }">Delete</button>
+            </div>
+        `;
 
       const checkbox = taskRow.querySelector(".task-checkbox");
       checkbox.addEventListener("change", function () {
@@ -112,22 +120,53 @@ document.addEventListener("DOMContentLoaded", () => {
         displayTasks();
       });
 
-      const deleteButton = taskRow.querySelector(".delete-btn");
-      deleteButton.addEventListener("click", function () {
-        const index = tasks.findIndex((t) => t.id === task.id);
-        if (index > -1) {
-          tasks.splice(index, 1);
-          saveTasks();
-        }
-        displayTasks();
-      });
       taskContainer.appendChild(taskRow);
     });
+
+    // Add this console.log to debug
+    console.log("Current tasks in storage:", loadTasks());
   }
 
-  // Event Listener for task filter
-  taskFilter.addEventListener("change", displayTasks);
+  // Deletion Modal Event Listeners
+  document.addEventListener("click", (event) => {
+    if (
+      event.target.matches(".delete-btn") ||
+      event.target.closest(".delete-btn")
+    ) {
+      modal.style.display = "block";
+      const taskId = event.target.dataset.taskId;
+      modal.dataset.taskToDelete = taskId;
+    }
+  });
 
-  // Initial Display call
+  confirmBtn.addEventListener("click", () => {
+    const taskId = parseInt(modal.dataset.taskToDelete);
+    const index = tasks.findIndex((t) => t.id === taskId);
+    if (index > -1) {
+      tasks.splice(index, 1);
+      saveTasks();
+      displayTasks();
+    }
+    modal.style.display = "none";
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Closes Deletion Modal when clicking outside
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Closes Deletion Modal with Escape Key
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.style.display === "block") {
+      modal.style.display = "none";
+    }
+  });
+
   displayTasks();
 });

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("New task page DOM is now fully loaded and parsed");
-  const taskForm = document.getElementById("new-task-form");
 
+  const taskForm = document.getElementById("new-task-form");
   const newTaskButton = document.getElementById("new-task-btn");
   const myTaskButton = document.getElementById("my-task-btn");
   const activeNewTaskButtonId = localStorage.getItem("activeNewTaskButton");
@@ -31,12 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log("Tasks saved:", tasks);
   }
 
   function loadTasks() {
-    const savedTasks = localStorage.getItem(`tasks`);
+    const savedTasks = localStorage.getItem("tasks");
+    console.log("Loading tasks from storage:", savedTasks);
     if (savedTasks) {
       const parsedTasks = JSON.parse(savedTasks);
+      console.log("Parsed tasks:", parsedTasks);
       taskId = parsedTasks.length
         ? parsedTasks[parsedTasks.length - 1].id + 1
         : 1;
@@ -45,88 +48,46 @@ document.addEventListener("DOMContentLoaded", () => {
     return [];
   }
 
-  // Function that displays task based on chosen filter
-  function displayTasks() {
-    const filteredTasks = tasks.filter((task) => {
-      if (taskFilter.value === "completed") {
-        return task.completed;
-      } else if (taskFilter.value === "pending") {
-        return !task.completed;
-      }
-      return true;
-    });
+  // Form submission handler
+  taskForm.addEventListener("submit", function (event) {
+    console.log("I am now creating a task!");
+    event.preventDefault();
 
-    filteredTasks.forEach((task) => {
-      const taskRow = document.createElement("div");
-      taskRow.classList.add("task-row", "new-task-row");
-      if (task.completed) {
-        taskRow.style.textDecoration = "line-through";
-        taskRow.style.color = "gray";
-      }
+    const taskName = document.getElementById("task-name").value;
+    const taskDeadline = document.getElementById("task-deadline").value;
+    const taskComment = document.getElementById("task-comment").value;
+    const taskInputDate = new Date().toLocaleDateString();
 
-      taskRow.innerHTML = `
-        <div>${task.id}</div>
-        <div>${task.name}</div>
-        <div>${task.dateAdded}</div>
-        <div>${task.deadline}</div>
-        <div>${task.comment}</div>
-        <div>
-          <input type="checkbox" class="task-checkbox" ${
-            task.completed ? "checked" : ""
-          }>
-        </div>
-        <div>
-          <button class="delete-btn">Delete</button>
-        </div>
-      `;
+    console.log("Current tasks before adding:", tasks);
 
-      const checkbox = taskRow.querySelector(".task-checkbox");
-      checkbox.addEventListener("change", function () {
-        task.completed = checkbox.ariaChecked;
-        saveTasks();
-        displayTasks();
-      });
+    // Handles the creation of a new task object which is then added to the task array
+    const task = {
+      id: taskId++,
+      name: taskName,
+      dateAdded: taskInputDate,
+      deadline: taskDeadline,
+      comment: taskComment,
+      completed: false,
+    };
 
-      const deleteButton = taskRow.querySelector(".delete-btn");
-      deleteButton.addEventListener("click", function () {
-        const index = tasks.findIndex((t) => t.id === task.id);
-        if (index > -1) {
-          tasks.splice(index, 1);
-          saveTasks();
-        }
-        displayTasks();
-      });
-      taskContainer.appendChild(taskRow);
-    });
-  }
+    tasks.push(task);
+    console.log("Current tasks after adding:", tasks);
 
-  // Event Listener when task is submitted
+    saveTasks();
+    console.log("Saved tasks:", localStorage.getItem("tasks"));
+
+    // Clear the form
+    this.reset();
+
+    // Redirect to main page
+    window.location.href = "todowebapp.html";
+  });
+
+  // Clear button handler
   document
-    .querySelector('button[type="add-task"]')
-    .addEventListener("click", function (event) {
-      console.log("I am now creating a task!");
+    .getElementById("clear-task-btn")
+    .addEventListener("click", (event) => {
       event.preventDefault();
-
-      const taskName = document.getElementById("task-name").value;
-      const taskDeadline = document.getElementById("task-deadline").value;
-      const taskComment = document.getElementById("task-comment").value;
-      const taskInputDate = new Date().toLocaleDateString();
-
-      // Handles the creation of a new task object which is then added to the task array
-      const task = {
-        id: taskId++,
-        name: taskName,
-        dateAdded: taskInputDate,
-        deadline: taskDeadline,
-        comment: taskComment,
-        completed: false,
-      };
-
-      tasks.push(task);
-      saveTasks();
-      window.location.href = "todowebapp.html";
-
-      // Handles the clearing of input fields after submitting
       taskForm.reset();
     });
 });
