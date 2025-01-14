@@ -140,6 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
       event.target.matches(".delete-btn") ||
       event.target.closest(".delete-btn")
     ) {
+      checkBoxSound.currentTime = 0;
+      checkBoxSound.play();
       modal.style.display = "block";
       const taskId = event.target.dataset.taskId;
       modal.dataset.taskToDelete = taskId;
