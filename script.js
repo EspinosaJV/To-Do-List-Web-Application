@@ -149,6 +149,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   confirmBtn.addEventListener("click", () => {
+    checkBoxSound.currentTime = 0;
+    checkBoxSound.play();
     const taskId = parseInt(modal.dataset.taskToDelete);
     const index = tasks.findIndex((t) => t.id === taskId);
     if (index > -1) {
@@ -160,6 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   cancelBtn.addEventListener("click", () => {
+    checkBoxSound.currentTime = 0;
+    checkBoxSound.play();
     modal.style.display = "none";
   });
 
