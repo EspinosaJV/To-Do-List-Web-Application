@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmBtn = document.getElementById("confirmBtn");
   const cancelBtn = document.getElementById("cancelBtn");
 
+  // audio variables
+  const checkBoxSound = new Audio("sounds/bubblepop.mp3");
+
+  checkBoxSound.load();
+
   let taskId = 1;
   let deleteHeaderAdded = false;
   const tasks = loadTasks();
@@ -114,6 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const checkbox = taskRow.querySelector(".task-checkbox");
       checkbox.addEventListener("change", function () {
+        checkBoxSound.currentTime = 0;
+        checkBoxSound.play();
         console.log("Task has changed checkbox state.");
         task.completed = checkbox.checked;
         saveTasks();
